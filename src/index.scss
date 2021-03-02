@@ -1,12 +1,62 @@
-:root {
-  font: 16px / 1 sans-serif;
-}
-
-html {
-  height: 100%;
-}
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Merriweather&display=swap');
 
 body {
-  margin: 0;
-  min-height: 100%;
+  font-family: 'Merriweather', serif;
+  font-size: 20px;
+}
+
+.header {
+  background-color: aquamarine;
+  font-family: 'Kaushan Script', cursive;
+  grid-column: 1 / span 2;
+  padding: 2rem;
+  text-align: center;
+  font-weight: bold;
+  font-size: 2rem;
+  background-image: url('https://unsplash.com/photos/aQfhbxailCs/download?force=true');
+  background-size: cover;
+  height: 16rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-shadow: 0 0 8px blue;
+}
+
+h2 {
+  font-family: 'Kaushan Script', cursive;
+}
+
+h3 {
+  font-family: 'Kaushan Script', cursive;
+}
+
+.notifications {
+  background-color: blue;
+  grid-column: 2;
+}
+
+.companies {
+  background-color: cornflowerblue;
+  grid-row: 2 / span 2;
+}
+
+.interactions {
+  background-color: darkcyan;
+  grid-column: 2;
+}
+
+.footer {
+  background-color: darkmagenta;
+  grid-column: 1 / span 2;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 64rem;
+}
+
+.home {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
 }
