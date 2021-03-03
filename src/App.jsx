@@ -98,7 +98,6 @@ export function App() {
           <PanelItem>
             <Notification title="Email PetCo" detail="Foo Bar" done={false} />
           </PanelItem>
-          <li className="hack"></li>
         </Panel>
       </aside>
 

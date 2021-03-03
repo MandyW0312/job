@@ -12,6 +12,37 @@ body {
   background-color: #76c1cc;
 }
 
+.home {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: repeat(2, min-content) auto min-content;
+  border-left: thin solid $border-color;
+  border-right: thin solid $border-color;
+  background-color: white;
+}
+
+a {
+  &:link {
+    text-decoration: none;
+    color: $link-color;
+  }
+
+  &:visited {
+    color: $link-color;
+  }
+
+  &:focus,
+  &:hover,
+  &:active {
+    text-decoration: underline;
+  }
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 64rem;
+}
+
 .header {
   background-color: aquamarine;
   font-family: 'Kaushan Script', cursive;
@@ -47,111 +78,8 @@ li {
   list-style: none;
 }
 
-.notifications {
-  grid-column: 2;
-
-  .panel ul {
-    max-height: 12rem;
-    overflow-y: scroll;
-    position: relative;
-
-    .hack {
-      background: linear-gradient(transparent, #fff);
-      pointer-events: none;
-      display: block;
-      position: sticky;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 2rem;
-      padding: 0;
-      border: none;
-    }
-  }
-  p {
-    color: lighten($text-color, 33%);
-    font-size: 0.9rem;
-  }
-  .toggle {
-    margin-right: 1rem;
-  }
-}
-
-.companies {
-  border-right: thin solid $border-color;
-  grid-row: 2 / span 2;
-}
-
-.interactions {
-  grid-column: 2;
-
-  .panel ul {
-    max-height: 12rem;
-    overflow-y: scroll;
-    position: relative;
-
-    .hack {
-      background: linear-gradient(transparent, #fff);
-      pointer-events: none;
-      display: block;
-      position: sticky;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 2rem;
-      padding: 0;
-      border: none;
-    }
-  }
-  p {
-    color: lighten($text-color, 33%);
-    font-size: 0.9rem;
-  }
-  .toggle {
-    margin-right: 1rem;
-  }
-}
-
-.footer {
-  grid-column: 1 / span 2;
-  border-top: thin solid $border-color;
-  font-size: 1rem;
-  background-color: lighten($border-color, 50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-}
-
-.container {
-  margin: 0 auto;
-  max-width: 64rem;
-}
-
-.home {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: repeat(2, min-content) auto min-content;
-  border-left: thin solid $border-color;
-  border-right: thin solid $border-color;
-  background-color: white;
-}
-
-a {
-  &:link {
-    text-decoration: none;
-    color: $link-color;
-  }
-
-  &:visited {
-    color: $link-color;
-  }
-
-  &:focus,
-  &:hover,
-  &:active {
-    text-decoration: underline;
-  }
+i {
+  color: #26242c;
 }
 
 .panel {
@@ -159,7 +87,7 @@ a {
     display: flex;
     justify-content: space-between;
     background-color: $panel-header-bg;
-    padding: 0.5rem;
+    padding-left: 0.5rem;
     text-transform: uppercase;
     font-size: 1rem;
     letter-spacing: 0.025rem;
@@ -167,10 +95,27 @@ a {
   }
 
   li {
-    padding: 1rem 0.5rem;
+    padding: 0;
     & + li {
       border-top: thin solid $border-color;
     }
+  }
+}
+
+.notifications {
+  grid-column: 2;
+
+  .panel ul {
+    max-height: 12rem;
+    overflow-y: scroll;
+    padding: 0;
+  }
+  p {
+    color: lighten($text-color, 33%);
+    font-size: 0.9rem;
+  }
+  .toggle {
+    margin-right: 1rem;
   }
 }
 
@@ -180,7 +125,16 @@ a {
   align-items: center;
 
   h3 {
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.15rem;
+  }
+}
+
+.companies {
+  border-right: thin solid $border-color;
+  grid-row: 2 / span 2;
+
+  .panel ul {
+    padding: 0;
   }
 }
 
@@ -203,6 +157,23 @@ a {
   }
 }
 
+.interactions {
+  grid-column: 2;
+
+  .panel ul {
+    max-height: 12rem;
+    overflow-y: scroll;
+    padding: 0;
+  }
+  p {
+    color: lighten($text-color, 33%);
+    font-size: 0.9rem;
+  }
+  .toggle {
+    margin-right: 1rem;
+  }
+}
+
 .interaction {
   display: flex;
   justify-content: space-between;
@@ -211,4 +182,15 @@ a {
   h3 {
     margin-bottom: 0.25rem;
   }
+}
+
+.footer {
+  grid-column: 1 / span 2;
+  border-top: thin solid $border-color;
+  font-size: 1rem;
+  background-color: lighten($border-color, 50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
 }
