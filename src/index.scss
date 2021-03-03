@@ -1,8 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Merriweather&display=swap');
 
+$text-color: #26242c;
+$border-color: #38b6ba;
+$link-color: #1fb5b4;
+$panel-header-bg: #83c6d1;
+
 body {
   font-family: 'Merriweather', serif;
   font-size: 20px;
+  color: $text-color;
+  background-color: #76c1cc;
 }
 
 .header {
@@ -20,35 +27,100 @@ body {
   justify-content: center;
   align-items: center;
   color: white;
-  text-shadow: 0 0 8px blue;
+  text-shadow: 0 0 8px darken($panel-header-bg, 25%);
+  border-bottom: thin solid $border-color;
+
+  sup {
+    font-size: 0.8rem;
+    vertical-align: super;
+    margin-left: 0.25rem;
+  }
 }
 
-h2 {
-  font-family: 'Kaushan Script', cursive;
-}
-
+h1,
+h2,
 h3 {
   font-family: 'Kaushan Script', cursive;
 }
 
+li {
+  list-style: none;
+}
+
 .notifications {
-  background-color: blue;
   grid-column: 2;
+
+  .panel ul {
+    max-height: 12rem;
+    overflow-y: scroll;
+    position: relative;
+
+    .hack {
+      background: linear-gradient(transparent, #fff);
+      pointer-events: none;
+      display: block;
+      position: sticky;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2rem;
+      padding: 0;
+      border: none;
+    }
+  }
+  p {
+    color: lighten($text-color, 33%);
+    font-size: 0.9rem;
+  }
+  .toggle {
+    margin-right: 1rem;
+  }
 }
 
 .companies {
-  background-color: cornflowerblue;
+  border-right: thin solid $border-color;
   grid-row: 2 / span 2;
 }
 
 .interactions {
-  background-color: darkcyan;
   grid-column: 2;
+
+  .panel ul {
+    max-height: 12rem;
+    overflow-y: scroll;
+    position: relative;
+
+    .hack {
+      background: linear-gradient(transparent, #fff);
+      pointer-events: none;
+      display: block;
+      position: sticky;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2rem;
+      padding: 0;
+      border: none;
+    }
+  }
+  p {
+    color: lighten($text-color, 33%);
+    font-size: 0.9rem;
+  }
+  .toggle {
+    margin-right: 1rem;
+  }
 }
 
 .footer {
-  background-color: darkmagenta;
   grid-column: 1 / span 2;
+  border-top: thin solid $border-color;
+  font-size: 1rem;
+  background-color: lighten($border-color, 50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
 }
 
 .container {
@@ -59,4 +131,84 @@ h3 {
 .home {
   display: grid;
   grid-template-columns: 2fr 1fr;
+  grid-template-rows: repeat(2, min-content) auto min-content;
+  border-left: thin solid $border-color;
+  border-right: thin solid $border-color;
+  background-color: white;
+}
+
+a {
+  &:link {
+    text-decoration: none;
+    color: $link-color;
+  }
+
+  &:visited {
+    color: $link-color;
+  }
+
+  &:focus,
+  &:hover,
+  &:active {
+    text-decoration: underline;
+  }
+}
+
+.panel {
+  & > header {
+    display: flex;
+    justify-content: space-between;
+    background-color: $panel-header-bg;
+    padding: 0.5rem;
+    text-transform: uppercase;
+    font-size: 1rem;
+    letter-spacing: 0.025rem;
+    color: darken($panel-header-bg, 40%);
+  }
+
+  li {
+    padding: 1rem 0.5rem;
+    & + li {
+      border-top: thin solid $border-color;
+    }
+  }
+}
+
+.notification {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h3 {
+    margin-bottom: 0.25rem;
+  }
+}
+
+.company {
+  header {
+    display: flex;
+    align-items: center;
+
+    h3 {
+      margin-right: 0.5rem;
+    }
+
+    a {
+      font-size: 0.8rem;
+    }
+  }
+
+  .actions {
+    text-align: right;
+  }
+}
+
+.interaction {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h3 {
+    margin-bottom: 0.25rem;
+  }
 }

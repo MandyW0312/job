@@ -1,5 +1,69 @@
 import React from 'react'
 import { Link, Route, Switch } from 'react-router-dom'
+import { Icon } from './Icon'
+
+function Notification({ title, detail, done }) {
+  return (
+    <div className="notification">
+      <div className="content">
+        <h3>{title}</h3>
+        <p>{detail}</p>
+      </div>
+      <div className="toggle">
+        <a href="#toggle">
+          {done ? <Icon name="check" /> : <Icon name="circle" style="far" />}
+        </a>
+      </div>
+    </div>
+  )
+}
+
+function Company({ name, url, description }) {
+  return (
+    <div className="company">
+      <header>
+        <h3>{name}</h3>
+        <a href={url}>
+          <Icon name="link" />
+        </a>
+      </header>
+      <div className="content">
+        <p>{description}</p>
+      </div>
+      <p className="actions">
+        <a href="#edit">
+          <Icon name="edit" />
+        </a>
+      </p>
+    </div>
+  )
+}
+
+function Interaction({ title, description, timeframe }) {
+  return (
+    <div className="content">
+      <h3>{title}</h3>
+      <p>{description}</p>
+      <p>{timeframe}</p>
+    </div>
+  )
+}
+
+function Panel({ title, headerAction, children }) {
+  return (
+    <div className="panel">
+      <header>
+        <h2>{title}</h2>
+        {headerAction}
+      </header>
+      <ul>{children}</ul>
+    </div>
+  )
+}
+
+function PanelItem({ children }) {
+  return <li className="panel-item">{children}</li>
+}
 
 export function App() {
   return (
@@ -9,92 +73,104 @@ export function App() {
       </header>
 
       <aside className="notifications">
-        <h2>Notifications</h2>
-        <a href="#new">New</a>
-        <ul>
-          <li>
-            <h3>Follow up with PetCo</h3>
-            <p>You applied 3 days ago.</p>
-          </li>
-          <li>
-            <h3>Interview with ACME Inc.</h3>
-            <p>Monday at 2 pm</p>
-          </li>
-        </ul>
+        <Panel
+          title="Notification"
+          headerAction={
+            <a href="#new">
+              <Icon name="plus" />
+            </a>
+          }
+        >
+          <PanelItem>
+            <Notification
+              title="Email ACME, Inc."
+              detail="Foo Bar"
+              done={true}
+            />
+          </PanelItem>
+          <PanelItem>
+            <Notification
+              title="Apply at ACME, Inc."
+              detail="Foo Bar"
+              done={false}
+            />
+          </PanelItem>
+          <PanelItem>
+            <Notification title="Email PetCo" detail="Foo Bar" done={false} />
+          </PanelItem>
+          <li className="hack"></li>
+        </Panel>
       </aside>
 
       <main className="companies">
-        <h2>Companies</h2>
-        <a href="#new">New</a>
-        <ul>
-          <li>
-            <h3>PetCo</h3>
-            <a href="https://pet.co">https://pet.co</a>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-              Veritatis eius dicta iure ullam.
-            </p>
-            <p>
-              <a href="#edit">Edit</a>
-            </p>
-          </li>
-          <li>
-            <h3>ACME Inc.</h3>
-            <a href="https://pet.co">https://pet.co</a>
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quae,
-              tenetur. Perferendis magnam maxime ipsam voluptas nesciunt illum.
-            </p>
-            <p>
-              <a href="#edit">Edit</a>
-            </p>
-          </li>
-          <li>
-            <h3>PetCo</h3>
-            <a href="https://pet.co">https://pet.co</a>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
-              ducimus totam voluptate ad.
-            </p>
-            <p>
-              <a href="#edit">Edit</a>
-            </p>
-          </li>
-          <li>
-            <h3>ACME Inc.</h3>
-            <a href="https://pet.co">https://pet.co</a>
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempore,
-              porro perferendis. Velit corrupti suscipit blanditiis ipsa
-              dignissimos.
-            </p>
-            <p>
-              <a href="#edit">Edit</a>
-            </p>
-          </li>
-        </ul>
+        <Panel
+          title="Companies"
+          headerAction={
+            <a href="#new">
+              <Icon name="plus" />
+            </a>
+          }
+        >
+          <PanelItem>
+            <Company
+              name="PetCo"
+              url="https://pet.co"
+              description="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae,
+              porro rem alias tempore."
+            ></Company>
+          </PanelItem>
+          <PanelItem>
+            <Company
+              name="ACME Inc."
+              url="https://pet.co"
+              description="Consequuntur repellendus, in eaque dolores aliquid accusantium
+              illo iusto quis consectetur, excepturi necessitatibus ullam labore
+              velit ex!"
+            ></Company>
+          </PanelItem>
+          <PanelItem>
+            <Company
+              name="ACME Inc."
+              url="https://pet.co"
+              description="Consequuntur repellendus, in eaque dolores aliquid accusantium
+              illo iusto quis consectetur, excepturi necessitatibus ullam labore
+              velit ex!"
+            ></Company>
+          </PanelItem>
+        </Panel>
       </main>
 
       <aside className="interactions">
-        <h2>Interactions</h2>
-        <a href="#new">New</a>
-        <ul>
-          <li>
-            <h3>Emailed PetCo</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-            <p>4 days ago</p>
-          </li>
-          <li>
-            <h3>Emailed ACME Inc.</h3>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
-            <p>2 days ago</p>
-          </li>
-          <li>
-            <h3>Applied at PetCo</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-            <p>2 days ago</p>
-          </li>
-        </ul>
+        <Panel
+          title="Interactions"
+          headerAction={
+            <a href="#new">
+              <Icon name="plus" />
+            </a>
+          }
+        >
+          <PanelItem>
+            <Interaction
+              title="Emailed PetCo"
+              description="Vel, ex accusantium hic harum eos odio dolorum."
+              timeframe="4 days ago"
+            ></Interaction>
+          </PanelItem>
+          <PanelItem>
+            <Interaction
+              title="Emailed ACME, Inc."
+              description="Vel, ex accusantium hic harum eos odio dolorum."
+              timeframe="2 days ago"
+            ></Interaction>
+          </PanelItem>
+          <PanelItem>
+            <Interaction
+              title="Applied at PetCo"
+              description="Vel, ex accusantium hic harum eos odio dolorum."
+              timeframe="2 days ago"
+            ></Interaction>
+          </PanelItem>
+        </Panel>
       </aside>
 
       <footer className="footer">
