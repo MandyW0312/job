@@ -4,7 +4,7 @@ import { Icon } from '../Icon'
 import { Panel } from './Panel'
 import { PanelItem } from './PanelItem'
 
-function NewCompanyModal() {
+function NewCompanyModal(props) {
   const [name, setName] = useState('')
   const [url, setUrl] = useState('')
   const [description, setDescription] = useState('')
@@ -23,6 +23,8 @@ function NewCompanyModal() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newCompanyToSendToApi),
     })
+
+    props.whenDoneWithAddingCompany()
   }
 
   return (
@@ -75,7 +77,7 @@ function NewCompanyModal() {
 export function Companies() {
   const [companiesAreLoaded, setCompaniesAreLoaded] = useState(false)
   const [companies, setCompanies] = useState([])
-  const [userPressedNew, setUserPressedNew] = useState(true)
+  const [userPressedNew, setUserPressedNew] = useState(false)
 
   useEffect(async function () {
     const response = await fetch('http://localhost:5000/api/Companies')
@@ -89,9 +91,26 @@ export function Companies() {
     return <div>Loading...</div>
   }
 
+  async function clearsTheUserPressedNewAndReloadsTheCompanies() {
+    setUserPressedNew(false)
+
+    const response = await fetch('http://localhost:5000/api/Companies')
+    const json = await response.json()
+
+    setCompanies(json)
+  }
+
   return (
     <main className="companies">
-      {userPressedNew ? <NewCompanyModal /> : <></>}
+      {userPressedNew ? (
+        <NewCompanyModal
+          whenDoneWithAddingCompany={
+            clearsTheUserPressedNewAndReloadsTheCompanies
+          }
+        />
+      ) : (
+        <></>
+      )}
       <Panel
         title="Companies"
         headerAction={
