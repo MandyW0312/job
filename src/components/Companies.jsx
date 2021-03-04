@@ -3,90 +3,12 @@ import { Company } from './Company'
 import { Icon } from '../Icon'
 import { Panel } from './Panel'
 import { PanelItem } from './PanelItem'
-
-function NewCompanyModal(props) {
-  const [name, setName] = useState('')
-  const [url, setUrl] = useState('')
-  const [description, setDescription] = useState('')
-
-  async function submitNewCompany(event) {
-    event.preventDefault()
-
-    const newCompanyToSendToApi = {
-      companyName: name,
-      url: url,
-      description: description,
-    }
-
-    await fetch('http://localhost:5000/api/Companies', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newCompanyToSendToApi),
-    })
-
-    props.whenDoneWithAddingCompany()
-  }
-
-  function handleCancel(event) {
-    event.preventDefault()
-
-    props.whenDoneWithAddingCompany()
-  }
-
-  return (
-    <div className="modal">
-      <form className="new-company">
-        <header>New Company</header>
-        <p>
-          <label>Name: </label>
-          <input
-            name="companyName"
-            type="text"
-            value={name}
-            onChange={function (event) {
-              setName(event.target.value)
-            }}
-          />
-        </p>
-        <p>
-          <label>URL: </label>
-          <input
-            name="url"
-            type="text"
-            value={url}
-            onChange={function (event) {
-              setUrl(event.target.value)
-            }}
-          />
-        </p>
-        <p>
-          <label>Description: </label>
-          <input
-            name="description"
-            type="text"
-            value={description}
-            onChange={function (event) {
-              setDescription(event.target.value)
-            }}
-          />
-        </p>
-        <p className="submit">
-          <a href="#" onClick={submitNewCompany}>
-            Submit
-          </a>
-          <a href="#" onClick={handleCancel}>
-            Cancel
-          </a>
-        </p>
-      </form>
-    </div>
-  )
-}
+import { NewCompanyModal } from './NewCompanyModal'
+import { Link, Route, Switch } from 'react-router-dom'
 
 export function Companies() {
   const [companiesAreLoaded, setCompaniesAreLoaded] = useState(false)
   const [companies, setCompanies] = useState([])
-  const [userPressedNew, setUserPressedNew] = useState(false)
 
   useEffect(async function () {
     const response = await fetch('http://localhost:5000/api/Companies')
@@ -101,8 +23,6 @@ export function Companies() {
   }
 
   async function clearsTheUserPressedNewAndReloadsTheCompanies() {
-    setUserPressedNew(false)
-
     const response = await fetch('http://localhost:5000/api/Companies')
     const json = await response.json()
 
@@ -110,42 +30,39 @@ export function Companies() {
   }
 
   return (
-    <main className="companies">
-      {userPressedNew ? (
-        <NewCompanyModal
-          whenDoneWithAddingCompany={
-            clearsTheUserPressedNewAndReloadsTheCompanies
-          }
-        />
-      ) : (
-        <></>
-      )}
-      <Panel
-        title="Companies"
-        headerAction={
-          <a
-            href="#new"
-            onClick={function (event) {
-              event.preventDefault()
-              setUserPressedNew(true)
-            }}
+    <>
+      <Switch>
+        <Route path="/new">
+          <NewCompanyModal
+            whenDoneWithAddingCompany={
+              clearsTheUserPressedNewAndReloadsTheCompanies
+            }
+          />
+        </Route>
+
+        <main className="companies">
+          <Panel
+            title="Companies"
+            headerAction={
+              <Link to="/new">
+                <Icon name="plus" />
+              </Link>
+            }
           >
-            <Icon name="plus" />
-          </a>
-        }
-      >
-        {companies.map(function (company) {
-          return (
-            <PanelItem key={company.id}>
-              <Company
-                name={company.companyName}
-                url={company.url}
-                description={company.description}
-              ></Company>
-            </PanelItem>
-          )
-        })}
-      </Panel>
-    </main>
+            {companies.map(function (company) {
+              return (
+                <PanelItem key={company.id}>
+                  <Company
+                    name={company.companyName}
+                    url={company.url}
+                    description={company.description}
+                  ></Company>
+                </PanelItem>
+              )
+            })}
+          </Panel>
+        </main>
+      </Switch>
+    </>
   )
 }
