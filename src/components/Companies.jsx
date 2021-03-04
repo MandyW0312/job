@@ -5,75 +5,20 @@ import { Panel } from './Panel'
 import { PanelItem } from './PanelItem'
 
 export function Companies() {
-  const [companies, setCompanies] = useState([
-    {
-      id: 1,
-      position: null,
-      technology: null,
-      contactName: 'Gavin Stark',
-      contactEmail: 'gavin@suncoast.io',
-      remote: true,
-      contactCount: 0,
-      companyName: 'SDG',
-      salary: 50000,
-      benefits: false,
-      companyLogo: null,
-      url: 'https://suncoast.io',
-      description: 'School for building Web Developers',
-    },
-    {
-      id: 2,
-      position: null,
-      technology: null,
-      contactName: 'Tim Cook',
-      contactEmail: 'tim@apple.com',
-      remote: false,
-      contactCount: 0,
-      companyName: 'Apple',
-      salary: 100000,
-      benefits: false,
-      companyLogo: null,
-      url: 'https://apple.com',
-      description: 'All things APPLE',
-    },
-    {
-      id: 3,
-      position: null,
-      technology: null,
-      contactName: 'Bill Gates',
-      contactEmail: 'gates@microsoft.com',
-      remote: true,
-      contactCount: 0,
-      companyName: 'Microsoft',
-      salary: 150000,
-      benefits: false,
-      companyLogo: null,
-      url: 'https://Microsoft.com',
-      description: 'Home of Windows and C#',
-    },
-    {
-      id: 4,
-      position: null,
-      technology: null,
-      contactName: 'Tim Cook',
-      contactEmail: 'tim@apple.com',
-      remote: false,
-      contactCount: 0,
-      companyName: 'Apple Music',
-      salary: 100000,
-      benefits: false,
-      companyLogo: null,
-      url: 'https://applemusic.com',
-      description: 'All things APPLE MUSIC',
-    },
-  ])
+  const [companiesAreLoaded, setCompaniesAreLoaded] = useState(false)
+  const [companies, setCompanies] = useState([])
 
   useEffect(async function () {
     const response = await fetch('http://localhost:5000/api/Companies')
     const json = await response.json()
 
     setCompanies(json)
+    setCompaniesAreLoaded(true)
   }, [])
+
+  if (!companiesAreLoaded) {
+    return <div>Loading...</div>
+  }
 
   return (
     <main className="companies">
