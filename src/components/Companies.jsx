@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Company } from './Company'
 import { Icon } from '../Icon'
 import { Panel } from './Panel'
@@ -51,7 +51,30 @@ export function Companies() {
       url: 'https://Microsoft.com',
       description: 'Home of Windows and C#',
     },
+    {
+      id: 4,
+      position: null,
+      technology: null,
+      contactName: 'Tim Cook',
+      contactEmail: 'tim@apple.com',
+      remote: false,
+      contactCount: 0,
+      companyName: 'Apple Music',
+      salary: 100000,
+      benefits: false,
+      companyLogo: null,
+      url: 'https://applemusic.com',
+      description: 'All things APPLE MUSIC',
+    },
   ])
+
+  useEffect(async function () {
+    const response = await fetch('http://localhost:5000/api/Companies')
+    const json = await response.json()
+
+    setCompanies(json)
+  }, [])
+
   return (
     <main className="companies">
       <Panel
