@@ -4,9 +4,14 @@ import { Icon } from '../Icon'
 import { Panel } from './Panel'
 import { PanelItem } from './PanelItem'
 
+function NewCompanyModal() {
+  return <div className="modal">Yes, they pressed New</div>
+}
+
 export function Companies() {
   const [companiesAreLoaded, setCompaniesAreLoaded] = useState(false)
   const [companies, setCompanies] = useState([])
+  const [userPressedNew, setUserPressedNew] = useState(true)
 
   useEffect(async function () {
     const response = await fetch('http://localhost:5000/api/Companies')
@@ -22,10 +27,17 @@ export function Companies() {
 
   return (
     <main className="companies">
+      {userPressedNew ? <NewCompanyModal /> : <></>}
       <Panel
         title="Companies"
         headerAction={
-          <a href="#new">
+          <a
+            href="#new"
+            onClick={function (event) {
+              event.preventDefault()
+              setUserPressedNew(true)
+            }}
+          >
             <Icon name="plus" />
           </a>
         }
