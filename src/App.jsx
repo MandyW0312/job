@@ -1,11 +1,11 @@
 import React from 'react'
 import { Link, Route, Switch } from 'react-router-dom'
-import { Company } from './components/Company'
 import { Icon } from './Icon'
 import { Interaction } from './components/Interaction'
 import { Notification } from './components/Notification'
 import { Panel } from './components/Panel'
 import { PanelItem } from './components/PanelItem'
+import { Companies } from './components/Companies'
 
 export function App() {
   return (
@@ -42,45 +42,7 @@ export function App() {
           </PanelItem>
         </Panel>
       </aside>
-
-      <main className="companies">
-        <Panel
-          title="Companies"
-          headerAction={
-            <a href="#new">
-              <Icon name="plus" />
-            </a>
-          }
-        >
-          <PanelItem>
-            <Company
-              name="PetCo"
-              url="https://pet.co"
-              description="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae,
-              porro rem alias tempore."
-            ></Company>
-          </PanelItem>
-          <PanelItem>
-            <Company
-              name="ACME Inc."
-              url="https://pet.co"
-              description="Consequuntur repellendus, in eaque dolores aliquid accusantium
-              illo iusto quis consectetur, excepturi necessitatibus ullam labore
-              velit ex!"
-            ></Company>
-          </PanelItem>
-          <PanelItem>
-            <Company
-              name="ACME Inc."
-              url="https://pet.co"
-              description="Consequuntur repellendus, in eaque dolores aliquid accusantium
-              illo iusto quis consectetur, excepturi necessitatibus ullam labore
-              velit ex!"
-            ></Company>
-          </PanelItem>
-        </Panel>
-      </main>
-
+      <Companies />
       <aside className="interactions">
         <Panel
           title="Interactions"
@@ -117,18 +79,6 @@ export function App() {
       <footer className="footer">
         <p>&copy; Made with &hearts; by Mandy Wade in 2021</p>
       </footer>
-      {/* <Switch>
-        <Route exact path="/">
-          Home
-        </Route>
-        <Route exact path="/1">
-          Page 1
-        </Route>
-        <Route exact path="/2">
-          Page 2
-        </Route>
-        <Route path="*">Not Found</Route>
-      </Switch> */}
     </div>
   )
 }
