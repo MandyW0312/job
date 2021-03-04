@@ -5,6 +5,7 @@ $border-color: #38b6ba;
 $link-color: #1fb5b4;
 $panel-header-bg: #83c6d1;
 $modal-color: #25242c99;
+$button-color: $panel-header-bg;
 
 body {
   font-family: 'Merriweather', serif;
@@ -215,4 +216,34 @@ i {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.new-company {
+  background-color: white;
+  width: 50vw;
+  height: 60vh;
+  border-radius: 0.5rem;
+  padding: 2rem;
+
+  header {
+    text-align: center;
+  }
+
+  p {
+    margin: 1rem 0;
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .submit {
+    margin: 2rem 0;
+    justify-content: center;
+
+    a {
+      background-color: $button-color;
+      display: block;
+      padding: 1rem;
+      color: $text-color;
+    }
+  }
 }

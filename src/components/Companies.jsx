@@ -5,7 +5,60 @@ import { Panel } from './Panel'
 import { PanelItem } from './PanelItem'
 
 function NewCompanyModal() {
-  return <div className="modal">Yes, they pressed New</div>
+  const [name, setName] = useState('')
+  const [url, setUrl] = useState('')
+  const [description, setDescription] = useState('')
+
+  function submitNewCompany() {
+    event.preventDefault()
+    console.log(`Make a new company: ${name}, ${url}, ${description}`)
+  }
+
+  return (
+    <div className="modal">
+      <form className="new-company">
+        <header>New Company</header>
+        <p>
+          <label>Name: </label>
+          <input
+            name="companyName"
+            type="text"
+            value={name}
+            onChange={function (event) {
+              setName(event.target.value)
+            }}
+          />
+        </p>
+        <p>
+          <label>URL: </label>
+          <input
+            name="url"
+            type="text"
+            value={url}
+            onChange={function (event) {
+              setUrl(event.target.value)
+            }}
+          />
+        </p>
+        <p>
+          <label>Description: </label>
+          <input
+            name="description"
+            type="text"
+            value={description}
+            onChange={function (event) {
+              setDescription(event.target.value)
+            }}
+          />
+        </p>
+        <p className="submit">
+          <a href="#" onClick={submitNewCompany}>
+            Submit
+          </a>
+        </p>
+      </form>
+    </div>
+  )
 }
 
 export function Companies() {
