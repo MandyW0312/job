@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Merriweather&display=swap');
 
 $text-color: #26242c;
-$border-color: #38b6ba;
-$link-color: #1fb5b4;
-$panel-header-bg: #83c6d1;
+$border-color: #b298dc;
+$link-color: #b8d0eb;
+$panel-header-bg: #b9faf8;
 $modal-color: #25242c99;
 $button-color: $panel-header-bg;
 
@@ -11,7 +11,7 @@ body {
   font-family: 'Merriweather', serif;
   font-size: 20px;
   color: $text-color;
-  background-color: #76c1cc;
+  background-color: #a663cc;
 }
 
 .home {
@@ -201,7 +201,7 @@ i {
   grid-column: 1 / span 2;
   border-top: thin solid $border-color;
   font-size: 1rem;
-  background-color: lighten($border-color, 30%);
+  background-color: lighten($border-color, 10%);
   text-align: center;
   padding: 0.5rem;
 }
