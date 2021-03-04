@@ -88,8 +88,7 @@ i {
     justify-content: space-between;
     background-color: $panel-header-bg;
     padding-left: 0.5rem;
-    text-transform: uppercase;
-    font-size: 1rem;
+    font-size: 0.75rem;
     letter-spacing: 0.025rem;
     color: darken($panel-header-bg, 40%);
   }
@@ -106,7 +105,7 @@ i {
   grid-column: 2;
 
   .panel ul {
-    max-height: 12rem;
+    max-height: 16rem;
     overflow-y: scroll;
     padding: 0;
   }
@@ -135,6 +134,8 @@ i {
 
   .panel ul {
     padding: 0;
+    max-height: 40rem;
+    overflow-y: scroll;
   }
 }
 
@@ -161,13 +162,14 @@ i {
   grid-column: 2;
 
   .panel ul {
-    max-height: 12rem;
+    max-height: 16rem;
     overflow-y: scroll;
     padding: 0;
   }
   p {
     color: lighten($text-color, 33%);
     font-size: 0.9rem;
+    margin-left: 0.5rem;
   }
   .toggle {
     margin-right: 1rem;
@@ -192,5 +194,5 @@ i {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+  padding: 1rem;
 }
